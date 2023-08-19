@@ -1,6 +1,3 @@
-import React from "react";
-import { Button } from "./ui/Button";
-
 const Billboard = () => {
   return (
     <div className="bg-blue-600 text-white p-6 lg:p-10">

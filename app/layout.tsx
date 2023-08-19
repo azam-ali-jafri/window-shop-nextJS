@@ -3,8 +3,12 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Billboard from "@/components/Billboard";
+import HomeProducts from "@/components/HomeProducts";
 
-const poppins = Poppins({ weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"], subsets: ["latin"] });
+const poppins = Poppins({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin-ext"],
+});
 
 export const metadata: Metadata = {
   title: "Window Shop",
@@ -18,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <hr />
         <Billboard />
+        <HomeProducts />
         {children}
       </body>
     </html>
