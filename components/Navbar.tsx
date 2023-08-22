@@ -15,8 +15,8 @@ const Navbar = () => {
       <div className="hidden lg:flex gap-4">
         <NavButton label="Home" icon={AiOutlineHome} />
         <NavButton label="Shop" icon={AiOutlineShopping} />
-        <NavButton label="User" icon={AiOutlineUser} />
         <NavButton label="Cart" icon={AiOutlineShoppingCart} />
+        <NavButton label="User" icon={AiOutlineUser} />
       </div>
 
       {/* mobile navbar */}
@@ -28,12 +28,9 @@ const Navbar = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="flex flex-col items-center gap-3 p-3 mx-4">
             <NavButton label="Home" icon={AiOutlineHome} className="w-full" />
-
             <NavButton label="Shop" icon={AiOutlineShopping} className="w-full" />
-
-            <NavButton label="User" icon={AiOutlineUser} className="w-full" />
-
             <NavButton label="Cart" icon={AiOutlineShoppingCart} className="w-full" />
+            <NavButton label="User" icon={AiOutlineUser} className="w-full" />
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
