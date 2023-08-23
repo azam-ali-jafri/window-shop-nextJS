@@ -23,29 +23,29 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email;
         session.user.image = token.picture;
       }
+
       return session;
     },
 
     async jwt({ token, user }) {
-      const dbuser = await db.user.findFirst({
+      const dbUser = await db.user.findFirst({
         where: {
-          email: token.email,
+          email: token.email!,
         },
       });
 
-      if (!dbuser) {
+      if (!dbUser) {
         token.id = user!.id;
         return token;
       }
 
       return {
-        id: dbuser.id,
-        name: dbuser.name,
-        email: dbuser.email,
-        picture: dbuser.image,
+        id: dbUser.id,
+        name: dbUser.name,
+        email: dbUser.email,
+        picture: dbUser.image,
       };
     },
-
     redirect() {
       return "/";
     },

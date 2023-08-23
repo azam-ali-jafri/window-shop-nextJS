@@ -1,5 +1,14 @@
-import Image from "next/image";
+import Billboard from "@/components/Billboard";
+import HomeProducts from "@/components/HomeProducts";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
-  return <div></div>;
+  return (
+    <div>
+      <Navbar />
+      <hr />
+      <Billboard />
+      <HomeProducts />
+    </div>
+  );
 }

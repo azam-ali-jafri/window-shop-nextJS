@@ -5,8 +5,11 @@ import { AiOutlineHome, AiOutlineShopping, AiOutlineShoppingCart, AiOutlineUser 
 import NavButton from "./NavButton";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/DropdownMenu";
+import { signIn, useSession } from "next-auth/react";
 
 const Navbar = () => {
+  const { data } = useSession();
+
   return (
     <div className="flex px-10 py-2 items-center justify-between">
       <div>
@@ -16,7 +19,13 @@ const Navbar = () => {
         <NavButton label="Home" icon={AiOutlineHome} />
         <NavButton label="Shop" icon={AiOutlineShopping} />
         <NavButton label="Cart" icon={AiOutlineShoppingCart} />
-        <NavButton label="User" icon={AiOutlineUser} />
+        {!data ? (
+          <NavButton label="Login" icon={AiOutlineUser} onClick={() => signIn("google")} />
+        ) : (
+          <div className="relative h-10 w-10 cursor-pointer hover:opacity-80">
+            <Image src={data.user.image!} alt="user-img" fill className="rounded-full" />
+          </div>
+        )}
       </div>
 
       {/* mobile navbar */}
