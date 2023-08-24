@@ -1,47 +1,42 @@
-"use client";
 import Logo from "@/images/Logo.png";
 import Image from "next/image";
-import { AiOutlineHome, AiOutlineShopping, AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
-import NavButton from "./NavButton";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/DropdownMenu";
-import { signIn, useSession } from "next-auth/react";
+import { AiOutlineHome, AiOutlineShopping, AiOutlineShoppingCart } from "react-icons/ai";
+import { buttonVariants } from "./ui/Button";
+import { getAuthSession } from "@/lib/auth";
+import Searchbar from "./Searchbar";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import MobileNavbar from "./MobileNavbar";
 
-const Navbar = () => {
-  const { data } = useSession();
+const links = [
+  { label: "Home", icon: AiOutlineHome, href: "/" },
+  { label: "Shop", icon: AiOutlineShopping, href: "/shop" },
+  { label: "Cart", icon: AiOutlineShoppingCart, href: "/cart" },
+];
+
+const Navbar = async () => {
+  const session = await getAuthSession();
 
   return (
-    <div className="flex px-10 py-2 items-center justify-between">
-      <div>
-        <Image src={Logo} alt="logo" className="w-20 h-20" />
-      </div>
-      <div className="hidden lg:flex gap-4">
-        <NavButton label="Home" icon={AiOutlineHome} />
-        <NavButton label="Shop" icon={AiOutlineShopping} />
-        <NavButton label="Cart" icon={AiOutlineShoppingCart} />
-        {!data ? (
-          <NavButton label="Login" icon={AiOutlineUser} onClick={() => signIn("google")} />
-        ) : (
-          <div className="relative h-10 w-10 cursor-pointer hover:opacity-80">
-            <Image src={data.user.image!} alt="user-img" fill className="rounded-full" />
-          </div>
-        )}
-      </div>
-
-      {/* mobile navbar */}
-
-      <div className="lg:hidden">
-        <DropdownMenu>
-          <DropdownMenuTrigger className="border rounded-md px-2 py-1">
-            <RxHamburgerMenu size={30} />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="flex flex-col items-center gap-3 p-3 mx-4">
-            <NavButton label="Home" icon={AiOutlineHome} className="w-full" />
-            <NavButton label="Shop" icon={AiOutlineShopping} className="w-full" />
-            <NavButton label="Cart" icon={AiOutlineShoppingCart} className="w-full" />
-            <NavButton label="User" icon={AiOutlineUser} className="w-full" />
-          </DropdownMenuContent>
-        </DropdownMenu>
+    <div className="fixed top-0 inset-0 h-24 bg-white border-2">
+      <div className="container h-full mx-auto flex items-center justify-between gap-4">
+        <div>
+          <Image src={Logo} alt="logo" className="w-20 h-20" />
+        </div>
+        <div className="w-[60%]">
+          <Searchbar />
+        </div>
+        <div className="hidden lg:flex gap-4 items-center">
+          {links.map((link) => (
+            <Link href={link.href} className={cn(buttonVariants(), "flex gap-2 items-center")}>
+              <link.icon />
+              {link.label}
+            </Link>
+          ))}
+        </div>
+        <div className="flex lg:hidden">
+          <MobileNavbar />
+        </div>
       </div>
     </div>
   );
