@@ -1,12 +1,12 @@
-import Logo from "@/images/Logo.png";
+import Logo from "@/images/logo.svg";
 import Image from "next/image";
 import { AiOutlineHome, AiOutlineShopping, AiOutlineShoppingCart } from "react-icons/ai";
 import { buttonVariants } from "./ui/Button";
-import { getAuthSession } from "@/lib/auth";
 import Searchbar from "./Searchbar";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import MobileNavbar from "./MobileNavbar";
+import LoginNav from "./LoginNav";
 
 const links = [
   { label: "Home", icon: AiOutlineHome, href: "/" },
@@ -15,8 +15,6 @@ const links = [
 ];
 
 const Navbar = async () => {
-  const session = await getAuthSession();
-
   return (
     <div className="fixed top-0 inset-0 h-24 bg-white border-2">
       <div className="container h-full mx-auto flex items-center justify-between gap-4">
@@ -33,6 +31,7 @@ const Navbar = async () => {
               {link.label}
             </Link>
           ))}
+          <LoginNav />
         </div>
         <div className="flex lg:hidden">
           <MobileNavbar />
