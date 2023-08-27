@@ -1,9 +1,8 @@
 "use client";
 import { useSession } from "next-auth/react";
-import { Button, buttonVariants } from "./ui/Button";
+import { Button } from "./ui/Button";
 import { BiLogIn } from "react-icons/bi";
 import { useLoginModal } from "@/hooks/useLoginModal";
-import { useEffect, useState } from "react";
 import { Avatar, AvatarImage } from "./ui/Avatar";
 
 const LoginNav = () => {

@@ -19,14 +19,14 @@ const Navbar = async () => {
     <div className="fixed top-0 inset-0 h-24 bg-white border-2">
       <div className="container h-full mx-auto flex items-center justify-between gap-4">
         <div>
-          <Image src={Logo} alt="logo" className="w-20 h-20" />
+          <Image src={Logo} alt="logo" className="w-14 h-14 md:w-20 md:h-20" />
         </div>
         <div className="w-[60%]">
           <Searchbar />
         </div>
         <div className="hidden lg:flex gap-4 items-center">
           {links.map((link) => (
-            <Link href={link.href} className={cn(buttonVariants(), "flex gap-2 items-center")}>
+            <Link key={link.label} href={link.href} className={cn(buttonVariants(), "flex gap-2 items-center")}>
               <link.icon />
               {link.label}
             </Link>

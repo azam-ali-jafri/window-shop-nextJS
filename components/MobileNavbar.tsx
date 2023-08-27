@@ -5,6 +5,7 @@ import { getAuthSession } from "@/lib/auth";
 import { AiOutlineHome, AiOutlineShopping, AiOutlineShoppingCart } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import LoginNav from "./LoginNav";
 
 const links = [
   { label: "Home", icon: AiOutlineHome, href: "/" },
@@ -23,11 +24,12 @@ const MobileNavbar = async () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="flex flex-col items-center gap-3 p-3 mx-4">
           {links.map((link) => (
-            <Link href={link.href} className={cn(buttonVariants(), "flex gap-2 items-center w-full")}>
+            <Link key={link.label} href={link.href} className={cn(buttonVariants(), "flex gap-2 items-center w-full")}>
               <link.icon />
               {link.label}
             </Link>
           ))}
+          <LoginNav />
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
